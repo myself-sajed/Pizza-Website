@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.82.0">
+  <title>Sajed's Pizza</title>
+
+  <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/"> -->
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    body,
+    html {
+      height: 50%;
+      margin: 0;
+    }
+
+
+    .bg {
+      /* The image used */
+      background-image: url("/media/pizza4.jpg");
+
+      height: 50%;
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-blend-mode: soft-light;
+
+    }
+
+    .tag-line {
+      animation: forwards;
+      transition: 3s;
+    }
+
+    #hungry {
+      font-size: 60px;
+    }
+
+    .header-font {
+      color: #fff;
+      font-size: 30px;
+      font-weight: bold;
+      font-family: "Brush Script MT", cursive;
+    }
+
+    .badge {}
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="/style/cover.css" rel="stylesheet">
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark bg">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <div>
+          <a href="/" class="float-md-start mb-0 text-decoration-none text-white header-font">Sajed's
+            Pizza</a>
+        </div>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/explore">Explore</a>
+          <a class="nav-link" href="/cart">Cart<span class="badge bg-light text-dark" id="cartCounter" style="margin-left: 3px;
+            padding: 2px;">
+              <%= session.cart ? session.cart.totalQty : '0' %>
+            </span></a>
+
+          <%if(user){%>
+            <a class="nav-link" href="/orders">Orders</a>
+            <form action="/logout" method="POST" , id="logout">
+              <a class="nav-link mx-3" href="#" onclick="document.getElementById('logout').submit();">Log Out</a>
+            </form>
+            <%}else{%>
+              <a class="nav-link" href="/login">Log In</a>
+              <a class="nav-link" href="/signup">Sign Up</a>
+              <%}%>
+        </nav>
+
+      </div>
+    </header>
+
+
+
+    <div class="px-3 tag-line">
+      <h1 id="hungry">Hungry?</h1>
+      <p class="lead">Order some delicious pizzas for your crying tummy!</p>
+      <br>
+      <%if(user){%>
+        <p class="lead">
+          <a href="/explore" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Order Now</a>
+        </p>
+        <%}else{%>
+          <p class="lead">
+            <a href="/login" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Login to Order</a>
+          </p>
+          <%}%>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+
+</body>
+
+</html>

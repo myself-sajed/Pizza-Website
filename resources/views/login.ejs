@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.82.0">
+  <title>Login- Sajed's Pizza</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/heroes/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    /* Header */
+    .nav-masthead .nav-link {
+      padding: .25rem 0;
+      font-weight: 700;
+      color: rgb(0, 0, 0);
+      background-color: transparent;
+      border-bottom: .25rem solid transparent;
+    }
+
+    .cover-container {
+      max-width: 65em;
+    }
+
+    .nav-masthead .nav-link:hover,
+    .nav-masthead .nav-link:focus {
+      border-bottom-color: rgba(32, 26, 26, 0.25);
+    }
+
+    .nav-masthead .nav-link+.nav-link {
+      margin-left: 1rem;
+    }
+
+    .nav-masthead .active {
+      color: rgb(3, 0, 0);
+      border-bottom-color: rgb(5, 0, 0);
+    }
+
+    .bg {
+      background: #000000;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #312f2f, #000000);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #3a3838, #000000);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    }
+
+    .header-font {
+      color: rgb(0, 0, 0);
+      font-size: 30px;
+      font-weight: bold;
+      font-family: "Brush Script MT", cursive;
+    }
+
+    .btn-cart {
+      background: #000000;
+      background: -webkit-linear-gradient(to right, #434343, #000000);
+      background: linear-gradient(to right, #434343, #000000);
+      border-radius: 20rem;
+      color: rgb(2, 0, 0);
+      margin-top: 1rem
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="/style/login.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <div>
+          <a href="/" class="float-md-start mb-0 text-decoration-none text-dark header-font">Sajed's
+            Pizza</a>
+        </div>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/explore">Explore</a>
+          <a class="nav-link" href="/cart">Cart<span class="badge bg-dark text-light" id="cartCounter" style="margin-left: 3px;
+            padding: 2px;">
+              <%= session.cart ? session.cart.totalQty : '0' %>
+            </span></a>
+          <a class="nav-link active" href="/login">Log In</a>
+          <a class="nav-link" href="/signup">Sign Up</a>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 mb-3">Login to get your order in less than 30 Minutes!</h1>
+        <p class="col-lg-10 fs-4">Dont have an account yet?</p>
+        <a class="btn btn-primary" href="/signup" role="button">Register</a>
+      </div>
+      <div class="col-10 mx-auto col-lg-5">
+        <form class="p-5 border rounded-3 bg-light" action="/login" method="POST">
+          <%if(messages.error=='Registration Successfull'){%>
+            <span style="color:green">
+              <%=messages.error%>
+            </span>
+            <%}else{%>
+              <span style="color:red">
+                <%=messages.error%>
+              </span>
+              <%}%>
+                <div class="form-floating mb-3 my-3">
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                  <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                    name="password">
+                  <label for="floatingPassword">Password</label>
+                </div>
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                <hr class="my-2">
+                <small class="text-muted">You're safe with us!</small>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>

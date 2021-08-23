@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet">
+    <!-- Prism Syntax Highlighting-->
+    <link rel="stylesheet"
+        href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/plugins/toolbar/prism-toolbar.css">
+    <link rel="stylesheet"
+        href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/prismjs/themes/prism-okaidia.css">
+    <!-- The Main Theme stylesheet (Contains also Bootstrap CSS)-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/css/style.default.cdea6c5a.css"
+        id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/css/custom.0a822280.css">
+    <!-- Favicon-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style type="text/css">
+        /* Chart.js */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+
+        .header-font {
+            color: rgb(10, 0, 0);
+            font-size: 30px;
+            font-weight: bold;
+            font-family: "Brush Script MT", cursive;
+            text-decoration: none;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow">
+            <a class="sidebar-toggler text-center me-4 me-lg-5 lead header-font" href="#">Sajed's Pizza</a>
+
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <div class="sidebar py-3" id="sidebar">
+            <h6 class="sidebar-heading">Main</h6>
+            <ul class="list-unstyled">
+                <li class="sidebar-list-item">
+                    <a class="sidebar-link text-muted active" href="index.html">
+                        <span class="sidebar-link-title">Dashboard</span></a>
+                </li>
+            </ul>
+            <h6 class="sidebar-heading">Links</h6>
+            <ul class="list-unstyled">
+                <li class="sidebar-list-item">
+                    <a class="sidebar-link text-muted" href="/">
+                        <span class="sidebar-link-title">Home</span></a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a class="sidebar-link text-muted" href="/cart">
+                        <span class="sidebar-link-title">Cart</span></a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a class="sidebar-link text-muted" href="/explore">
+                        <span class="sidebar-link-title">Explore</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="page-holder bg-gray-100">
+
+            <!-- Main Content -->
+            <div class="container">
+                <h2>Total Orders</h2>
+                <br>
+                <table class="table table-responsive ">
+                    <thead class="table-dark rounded">
+                        <tr>
+
+                            <th scope="col">Order</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body">
+                        <% orders.forEach(order=>{%>
+                            <tr>
+                                <td><b>
+                                        <%=order._id%>
+                                    </b>
+                                    <ul>
+                                        <% for (let item of Object.values(order.items)) {%>
+                                            <li>
+                                                <%=item.item.name%> - <%=item.qty%> pcs
+                                            </li>
+                                            <%}%>
+                                    </ul>
+                                </td>
+                                <td><b>
+                                        <%=order.name%>
+                                    </b>
+                                </td>
+                                <td><b>
+                                        <%=order.phone%>
+                                    </b>
+                                </td>
+                                <td><b>
+                                        <%=order.address%>
+                                    </b></td>
+                                <td>
+                                    <form action="/admin/dashboard" method="POST">
+                                        <input type="hidden" name="orderId" value="<%=order._id%>">
+                                        <select name="status" class="form-select" onchange="this.form.submit()">
+                                            <option value="Placed" <%=order.status==='Order_Placed_Successfully'
+                                                ? 'selected' : '' %>>Placed</option>
+                                            <option value="Verified" <%=order.status==='Verified' ? 'selected' : '' %>
+                                                >Verified</option>
+                                            <option value="Prepared" <%=order.status==='Prepared' ? 'selected' : '' %>
+                                                >Prepared</option>
+                                            <option value="Out for Delivery" <%=order.status==='Out for Delivery'
+                                                ? 'selected' : '' %>>Out for Delivery</option>
+                                            <option value="Delivered" <%=order.status==='Delivered' ? 'selected' : '' %>
+                                                >Delivered</option>
+                                        </select>
+                                    </form>
+                                </td>
+                            </tr>
+                            <%})%>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="https://d19m59y37dris4.cloudfront.net/bubbly/1-0/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- Init Charts on Homepage-->
+    <!-- Main Theme JS File-->
+    <!-- Prism for syntax highlighting-->
+
+
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="js/explore.js"></script>
+</body>
+
+</html>
